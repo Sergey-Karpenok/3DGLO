@@ -19,9 +19,9 @@ window.addEventListener('DOMContentLoaded', function() {
         function updateClock() {
             let timer = getTimeRemaning();
 
-            timerSeconds.textContent = timer.seconds;
-            timerMinutes.textContent = timer.minutes;
-            timerHours.textContent = timer.hours;
+            timerSeconds.textContent = addNull(timer.seconds);
+            timerMinutes.textContent = addNull(timer.minutes);
+            timerHours.textContent = addNull(timer.hours);
 
             if (timer.timeRemaining > 0) {
                 setInterval(updateClock, 1000);
@@ -30,6 +30,12 @@ window.addEventListener('DOMContentLoaded', function() {
                 timerMinutes.textContent = '00';
                 timerHours.textContent = '00';
             }
+        }
+
+        function addNull(time) {
+            if (time > 0 && time < 10) {
+                return '0' + time
+            } else return time
         }
 
         updateClock();
