@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', function() {
     'use strict'
 
+    // Timer
     function timerCount(deadLine) {
         let timerHours = document.querySelector('#timer-hours'),
             timerMinutes = document.querySelector('#timer-minutes'),
@@ -43,9 +44,20 @@ window.addEventListener('DOMContentLoaded', function() {
         };
 
     };
+    timerCount('2021 22 april');
 
-    timerCount('2021 24 april');
+    // Menu
 
+    function toggleMenu() {
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu');
+
+        btnMenu.addEventListener('click', () => {
+            menu.style.transform = `translate(0)`;
+        });
+
+    };
+    toggleMenu()
 
 
 
