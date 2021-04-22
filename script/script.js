@@ -18,29 +18,31 @@ window.addEventListener('DOMContentLoaded', function() {
 
         function updateClock() {
             let timer = getTimeRemaning();
-
-            timerSeconds.textContent = addNull(timer.seconds);
-            timerMinutes.textContent = addNull(timer.minutes);
-            timerHours.textContent = addNull(timer.hours);
+            console.log('timer: ', timer);
 
             if (timer.timeRemaining > 0) {
-                setInterval(updateClock, 1000);
+                timerSeconds.textContent = addNull(timer.seconds);
+                timerMinutes.textContent = addNull(timer.minutes);
+                timerHours.textContent = addNull(timer.hours);
+
             } else {
+                clearInterval(idInterval);
                 timerSeconds.textContent = '00';
                 timerMinutes.textContent = '00';
                 timerHours.textContent = '00';
             }
-        }
+
+        };
+        let idInterval = setInterval(updateClock(), 1000);
+        console.log('idInterval: ', setInterval);
 
         function addNull(time) {
             if (time > 0 && time < 10) {
                 return '0' + time
             } else return time
-        }
+        };
 
-        updateClock();
-
-    }
+    };
 
     timerCount('2021 24 april');
 
