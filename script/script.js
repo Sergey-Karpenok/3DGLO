@@ -24,7 +24,6 @@ window.addEventListener('DOMContentLoaded', function() {
                 timerSeconds.textContent = addNull(timer.seconds);
                 timerMinutes.textContent = addNull(timer.minutes);
                 timerHours.textContent = addNull(timer.hours);
-
             } else {
                 clearInterval(idInterval);
                 timerSeconds.textContent = '00';
@@ -33,7 +32,8 @@ window.addEventListener('DOMContentLoaded', function() {
             }
 
         };
-        let idInterval = setInterval(updateClock(), 1000);
+
+        let idInterval = setInterval(updateClock, 1000);
         console.log('idInterval: ', setInterval);
 
         function addNull(time) {
