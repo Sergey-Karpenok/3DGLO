@@ -19,8 +19,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
         function updateClock() {
             let timer = getTimeRemaning();
-            console.log('timer: ', timer);
-
             if (timer.timeRemaining > 0) {
                 timerSeconds.textContent = addNull(timer.seconds);
                 timerMinutes.textContent = addNull(timer.minutes);
@@ -35,7 +33,6 @@ window.addEventListener('DOMContentLoaded', function() {
         };
 
         let idInterval = setInterval(updateClock, 1000);
-        console.log('idInterval: ', setInterval);
 
         function addNull(time) {
             if (time > 0 && time < 10) {
@@ -49,16 +46,39 @@ window.addEventListener('DOMContentLoaded', function() {
     // Menu
 
     function toggleMenu() {
+
         const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu');
+            menu = document.querySelector('menu'),
+            closeBtn = document.querySelector('.close-btn'),
+            menuItems = menu.querySelectorAll('ul>li');
 
-        btnMenu.addEventListener('click', () => {
-            menu.style.transform = `translate(0)`;
-        });
+        const handlerMenu = () => menu.classList.toggle('active-menu');
 
+        btnMenu.addEventListener('click', handlerMenu);
+        closeBtn.addEventListener('click', handlerMenu);
+        menuItems.forEach((item) => item.addEventListener('click', handlerMenu));
     };
     toggleMenu()
 
+    //  Popup
+    function togglePopUp() {
+
+        const popup = document.querySelector('.popup'),
+            popupBtn = document.querySelectorAll('.popup-btn'),
+            popupClose = document.querySelector('.popup-close');
+
+        popupBtn.forEach((item) => {
+            item.addEventListener('click', () => {
+                popup.style.display = 'block';
+            })
+        });
+
+        popupClose.addEventListener('click', () => {
+            popup.style.display = 'none';
+        })
+
+    };
+    togglePopUp()
 
 
 });
