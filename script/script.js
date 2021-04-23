@@ -65,18 +65,41 @@ window.addEventListener('DOMContentLoaded', function() {
 
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
-            popupClose = document.querySelector('.popup-close');
+            popupClose = document.querySelector('.popup-close'),
+            popupContent = document.querySelector('.popup-content');
 
         popupBtn.forEach((item) => {
             item.addEventListener('click', () => {
-                popup.style.display = 'block';
+                if (screen.width > 768) {
+                    popup.style.display = 'block';
+                    showInt = requestAnimationFrame(animatedPopup);
+                    count = 0;
+                } else {
+                    popup.style.display = 'block';
+                }
             })
         });
 
         popupClose.addEventListener('click', () => {
             popup.style.display = 'none';
-        })
 
+        });
+
+
+        let count = 0,
+            showInt;
+
+        function animatedPopup() {
+            let clientHeigh = document.documentElement.clientHeight / 2,
+                popupHeigh = popupContent.getBoundingClientRect().height / 2;
+            showInt = requestAnimationFrame(animatedPopup);
+            count = count + 4;
+            if (count < (clientHeigh - popupHeigh)) {
+                popupContent.style.top = count + 'px';
+            } else {
+                cancelAnimationFrame(showInt);
+            }
+        };
     };
     togglePopUp()
 
