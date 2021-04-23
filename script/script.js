@@ -43,8 +43,7 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     timerCount('2021 22 april');
 
-    // Menu
-
+    // Делаем Menu
     function toggleMenu() {
 
         const btnMenu = document.querySelector('.menu'),
@@ -60,12 +59,11 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     toggleMenu()
 
-    //  Popup
+    // Делаем Popup
     function togglePopUp() {
 
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
-            popupClose = document.querySelector('.popup-close'),
             popupContent = document.querySelector('.popup-content');
 
         popupBtn.forEach((item) => {
@@ -78,11 +76,6 @@ window.addEventListener('DOMContentLoaded', function() {
                     popup.style.display = 'block';
                 }
             })
-        });
-
-        popupClose.addEventListener('click', () => {
-            popup.style.display = 'none';
-
         });
 
         let count = 0,
@@ -99,8 +92,51 @@ window.addEventListener('DOMContentLoaded', function() {
                 cancelAnimationFrame(showInt);
             }
         };
+
+        popup.addEventListener('click', (event) => {
+            let target = event.target;
+            if (target.classList.contains('popup-close')) {
+                popup.style.display = 'none';
+            } else {
+                target = target.closest('.popup-content')
+                if (target === null) {
+                    popup.style.display = 'none';
+                }
+            }
+        });
     };
     togglePopUp()
 
+    // Делаем табы
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header'),
+            tab = tabHeader.querySelectorAll('.service-header-tab'),
+            tabContent = document.querySelectorAll('.service-tab');
+
+        const toggleTabContent = (index) => {
+            tabContent.forEach((item, i) => {
+                if (item === tabContent[index]) {
+                    tab[i].classList.add('active');
+                    item.classList.remove('d-none');
+                } else {
+                    tab[i].classList.remove('active');
+                    item.classList.add('d-none');
+                }
+            });
+        };
+
+        tabHeader.addEventListener('click', (event) => {
+            let target = event.target;
+            target = target.closest('.service-header-tab');
+            if (target) {
+                tab.forEach((item, i) => {
+                    if (item === target) {
+                        toggleTabContent(i);
+                    }
+                })
+            }
+        })
+    };
+    tabs();
 
 });
