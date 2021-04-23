@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         popupBtn.forEach((item) => {
             item.addEventListener('click', () => {
-                if (screen.width > 768) {
+                if (window.innerWidth > 768) {
                     popup.style.display = 'block';
                     showInt = requestAnimationFrame(animatedPopup);
                     count = 0;
@@ -84,7 +84,6 @@ window.addEventListener('DOMContentLoaded', function() {
             popup.style.display = 'none';
 
         });
-
 
         let count = 0,
             showInt;
