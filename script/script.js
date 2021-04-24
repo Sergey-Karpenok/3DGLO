@@ -53,9 +53,16 @@ window.addEventListener('DOMContentLoaded', function() {
 
         const handlerMenu = () => menu.classList.toggle('active-menu');
 
+        menu.addEventListener('click', (event) => {
+            let target = event.target;
+            console.log('target: ', target);
+            if (target.tagName !== 'A') return
+            handlerMenu();
+        });
+
         btnMenu.addEventListener('click', handlerMenu);
-        closeBtn.addEventListener('click', handlerMenu);
-        menuItems.forEach((item) => item.addEventListener('click', handlerMenu));
+        // closeBtn.addEventListener('click', handlerMenu);
+        // menuItems.forEach((item) => item.addEventListener('click', handlerMenu));
     };
     toggleMenu()
 
