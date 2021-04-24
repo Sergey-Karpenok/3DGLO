@@ -81,6 +81,8 @@ window.addEventListener('DOMContentLoaded', function() {
                     count = 0;
                 } else {
                     popup.style.display = 'block';
+                    popupContent.style.top = 0 + `%`;
+                    console.log('popup.style.top: ', popup.style.top);
                 }
             })
         });
