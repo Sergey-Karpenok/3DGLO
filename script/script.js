@@ -150,7 +150,8 @@ window.addEventListener('DOMContentLoaded', function() {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
             dot = document.querySelectorAll('.dot'),
-            slider = document.querySelector('.portfolio-content');
+            slider = document.querySelector('.portfolio-content'),
+            portfolioDots = document.querySelector('.portfolio-dots');
 
         let currentSlide = 0,
             interval;
@@ -227,9 +228,30 @@ window.addEventListener('DOMContentLoaded', function() {
                 event.target.matches('.dot')) {
                 startSlide();
             }
-        })
+        });
 
-        startSlide(1500);
+        const addDots = () => {
+            let dot = document.createElement('li'),
+                dotActiv;
+
+            dot.classList.add('dot');
+            for (let i = 0; i < slide.length; i++) {
+                portfolioDots.appendChild(dot);
+                console.log('portfolioDots: ', portfolioDots);
+
+                // if (dot[0]) {
+                //     dot.classList.add('dot dot-active');
+                //     portfolioDots.appendChild(dot);
+                // } else {
+                //     dot.classList.add('dot');
+                //     portfolioDots.appendChild(dot);
+                // }
+            }
+        };
+
+        addDots();
+
+        startSlide(15000);
     };
     slider();
 
