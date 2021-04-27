@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
-            dot = document.querySelectorAll('.dot'),
+            // dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content'),
             portfolioDots = document.querySelector('.portfolio-dots');
 
@@ -231,28 +231,31 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         const addDots = () => {
-            let dot = document.createElement('li'),
+
+            let li = document.createElement('li'),
                 dotActiv;
 
-            dot.classList.add('dot');
-            for (let i = 0; i < slide.length; i++) {
-                portfolioDots.appendChild(dot);
-                console.log('portfolioDots: ', portfolioDots);
-
-                // if (dot[0]) {
-                //     dot.classList.add('dot dot-active');
-                //     portfolioDots.appendChild(dot);
-                // } else {
-                //     dot.classList.add('dot');
-                //     portfolioDots.appendChild(dot);
-                // }
+            li.classList.add('dot', 'dot-active');
+            portfolioDots.appendChild(li);
+            let dot = document.querySelector('.dot'),
+                newDot;
+            console.log('newDot: ', newDot);
+            for (let i = 0; i < slide.length - 1; i++) {
+                newDot = dot.cloneNode();
+                newDot.classList.remove('dot-active');
+                portfolioDots.appendChild(newDot);
             }
+            console.log(portfolioDots);
         };
 
         addDots();
-
+        let dot = document.querySelectorAll('.dot');
         startSlide(15000);
+
+
     };
     slider();
+
+
 
 });
