@@ -231,21 +231,13 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         const addDots = () => {
-
-            let li = document.createElement('li'),
-                dotActiv;
-
-            li.classList.add('dot', 'dot-active');
-            portfolioDots.appendChild(li);
-            let dot = document.querySelector('.dot'),
-                newDot;
-            console.log('newDot: ', newDot);
-            for (let i = 0; i < slide.length - 1; i++) {
-                newDot = dot.cloneNode();
-                newDot.classList.remove('dot-active');
-                portfolioDots.appendChild(newDot);
-            }
-            console.log(portfolioDots);
+            slide.forEach(() => {
+                const newElem = document.createElement('li');
+                newElem.classList.add('dot');
+                portfolioDots.append(newElem);
+            });
+            let dots = document.querySelectorAll('.dot');
+            dots[currentSlide].classList.add('dot-active');
         };
 
         addDots();
