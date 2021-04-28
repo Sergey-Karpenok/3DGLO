@@ -247,7 +247,7 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     slider();
 
-    // меняем data атрибут
+    // меняем data атрибут у картинок
     const changeImg = () => {
         const photo = document.querySelectorAll('.command__photo');
 
@@ -265,5 +265,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
     };
     changeImg();
+
+    // запрещаем ввод букв в калькуляторе
+    const calcCheck = () => {
+        const calcs = document.querySelectorAll('.calc-item');
+
+        calcs.forEach((item) => {
+            item.addEventListener('input', (event) => {
+                event.target.value = event.target.value.replace(/\D/g, '');
+            })
+        });
+    };
+    calcCheck();
+
+
 
 });
