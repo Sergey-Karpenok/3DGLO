@@ -149,7 +149,6 @@ window.addEventListener('DOMContentLoaded', function() {
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
-            // dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content'),
             portfolioDots = document.querySelector('.portfolio-dots');
 
@@ -248,6 +247,23 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     slider();
 
+    // меняем data атрибут
+    const changeImg = () => {
+        const photo = document.querySelectorAll('.command__photo');
 
+        photo.forEach((item) => {
+            let src;
+            item.addEventListener('mouseenter', (event) => {
+                src = event.target.src;
+                event.target.src = event.target.dataset.img;
+            })
+            item.addEventListener('mouseout', (event) => {
+                event.target.src = src;
+            })
+
+        });
+
+    };
+    changeImg();
 
 });
