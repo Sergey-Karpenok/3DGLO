@@ -291,9 +291,27 @@ window.addEventListener('DOMContentLoaded', function() {
         form2Message.addEventListener('input', (event) => {
             event.target.value = event.target.value.replace(/[^а-яА-Я\- ]/g, '');
         });
-
-
     };
     nameMessageCheck();
+
+    // проверка формы email
+    const emailCheck = () => {
+        const email = document.getElementById('form2-email');
+
+        email.addEventListener('input', (event) => {
+            event.target.value = event.target.value.replace(/[^a-zA-Z\@\-\_\.\!\~\*\']/g, '');
+        });
+    };
+    emailCheck();
+
+    // проверка формы телефон
+    const phoneCheck = () => {
+        const phone = document.getElementById('form2-phone');
+
+        phone.addEventListener('input', (event) => {
+            event.target.value = event.target.value.replace(/[^0-9()-]/g, '');
+        });
+    };
+    phoneCheck();
 
 });
