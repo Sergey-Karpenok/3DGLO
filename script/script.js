@@ -271,8 +271,8 @@ window.addEventListener('DOMContentLoaded', function() {
         const calcs = document.querySelectorAll('.calc-item');
 
         calcs.forEach((item) => {
-            item.addEventListener('input', (event) => {
-                event.target.value = event.target.value.replace(/\D/g, '');
+            item.addEventListener('input', () => {
+                item.value = item.value.replace(/\D/g, '');
             })
         });
     };
@@ -284,13 +284,25 @@ window.addEventListener('DOMContentLoaded', function() {
         const form2Name = document.getElementById('form2-name');
         const form2Message = document.getElementById('form2-message')
 
-        form2Name.addEventListener('input', (event) => {
-            event.target.value = event.target.value.replace(/[^а-яА-Я\- ]/g, '');
+        form2Name.addEventListener('input', () => {
+            form2Name.value = form2Name.value.replace(/[^а-яА-Я\- ]/g, '');
         });
 
-        form2Message.addEventListener('input', (event) => {
-            event.target.value = event.target.value.replace(/[^а-яА-Я\- ]/g, '');
+        form2Message.addEventListener('input', () => {
+            form2Message.value = form2Message.value.replace(/[^а-яА-Я\- ]/g, '');
         });
+
+        form2Name.addEventListener('blur', () => {
+            form2Name.value = form2Name.value.toLowerCase();
+            form2Name.value = form2Name.value.replace(/^.|\s\D/g, (match) => match.toUpperCase());
+        });
+
+        form2Message.addEventListener('blur', () => {
+            form2Message.value = form2Message.value.replace(/-+/, '-');
+            form2Message.value = form2Message.value.replace(/\ +/, ' ');
+        });
+
+
     };
     nameMessageCheck();
 
@@ -298,8 +310,8 @@ window.addEventListener('DOMContentLoaded', function() {
     const emailCheck = () => {
         const email = document.getElementById('form2-email');
 
-        email.addEventListener('input', (event) => {
-            event.target.value = event.target.value.replace(/[^a-zA-Z\@\-\_\.\!\~\*\']/g, '');
+        email.addEventListener('input', () => {
+            email.value = email.value.replace(/[^a-zA-Z@-_\.\!~\*']/g, '');
         });
     };
     emailCheck();
@@ -308,10 +320,17 @@ window.addEventListener('DOMContentLoaded', function() {
     const phoneCheck = () => {
         const phone = document.getElementById('form2-phone');
 
-        phone.addEventListener('input', (event) => {
-            event.target.value = event.target.value.replace(/[^0-9()-]/g, '');
+        phone.addEventListener('input', () => {
+            phone.value = phone.value.replace(/[^0-9()-]/g, '');
         });
+        phone.addEventListener('blur', () => {
+            phone.value = phone.value.replace(/-+/, '-');
+        });
+
     };
     phoneCheck();
+
+
+
 
 });
