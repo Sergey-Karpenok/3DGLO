@@ -278,6 +278,22 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     calcCheck();
 
+    // проверка формы на корректный ввод данных
+    //  проверка имени и сообщения
+    const nameMessageCheck = () => {
+        const form2Name = document.getElementById('form2-name');
+        const form2Message = document.getElementById('form2-message')
 
+        form2Name.addEventListener('input', (event) => {
+            event.target.value = event.target.value.replace(/[^а-яА-Я\- ]/g, '');
+        });
+
+        form2Message.addEventListener('input', (event) => {
+            event.target.value = event.target.value.replace(/[^а-яА-Я\- ]/g, '');
+        });
+
+
+    };
+    nameMessageCheck();
 
 });
