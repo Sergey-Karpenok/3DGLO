@@ -248,23 +248,18 @@ window.addEventListener('DOMContentLoaded', function() {
     slider();
 
     // меняем data атрибут у картинок
-    const changeImg = () => {
-        const photo = document.querySelectorAll('.command__photo');
+    const command = document.getElementById('command');
 
-        photo.forEach((item) => {
-            let src;
-            item.addEventListener('mouseenter', (event) => {
-                src = event.target.src;
-                event.target.src = event.target.dataset.img;
-            })
-            item.addEventListener('mouseout', (event) => {
-                event.target.src = src;
-            })
+    const toggleImg = (event) => {
+        const target = event.target;
 
-        });
+        if (!target.matches('img')) return;
 
+        [target.dataset.img, target.src] = [target.src, target.dataset.img];
     };
-    changeImg();
+
+    command.addEventListener('mouseover', toggleImg);
+    command.addEventListener('mouseout', toggleImg);
 
     // запрещаем ввод букв в калькуляторе
     const calcCheck = () => {
@@ -293,6 +288,7 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         form2Name.addEventListener('blur', () => {
+            form2Name.value = form2Name.value.replace(/\ +/, ' ');
             form2Name.value = form2Name.value.toLowerCase();
             form2Name.value = form2Name.value.replace(/^.|\s\D/g, (match) => match.toUpperCase());
         });
@@ -330,7 +326,7 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     phoneCheck();
 
-
+    // делаем калькуолятор
 
 
 });
