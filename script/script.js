@@ -336,9 +336,9 @@ window.addEventListener('DOMContentLoaded', function() {
             totalValue = document.getElementById('total');
 
         const countSum = () => {
-            let total = 0,
-                typeValue = calcType.options[calcType.selectedIndex].value,
-                squareValue;
+            let total = 0;
+            let typeValue = calcType.options[calcType.selectedIndex];
+            let squareValue;
             console.log('typeValue: ', typeValue);
             totalValue.textContent = total;
         };
