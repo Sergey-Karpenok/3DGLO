@@ -371,5 +371,13 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     calc(100);
 
+    // валидатор
+    const valid = new Validator({
+        selector: '#form2',
+        pattern: {},
+        metod: {}
+    });
+
+    valid.init();
 
 });
