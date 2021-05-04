@@ -375,7 +375,16 @@ window.addEventListener('DOMContentLoaded', function() {
     const valid = new Validator({
         selector: '#form2',
         pattern: {},
-        metod: {}
+        metod: {
+            'name': [
+                ['notEmpty'],
+                ['pattern', 'name']
+            ],
+            'message': [
+                ['notEmpty'],
+                ['pattern', 'message']
+            ]
+        }
     });
 
     valid.init();

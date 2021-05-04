@@ -16,7 +16,22 @@ class Validator {
     }
 
     isValid(elem) {
-        return false;
+        const validatorMethod = {
+            notEmpty(elem) {
+                if (elem.value.trim() === '') {
+                    return false;
+                }
+                return true;
+            },
+            pattern(elem, pattern) {
+                return elem.pattern.test(pattern.value)
+            }
+        };
+
+        const metod = this.metod;
+        console.log('metod: ', metod);
+
+        return true;
     }
 
     checkIt(event) {
@@ -72,6 +87,15 @@ class Validator {
     }
 
     setPattern() {
+
+        if (!this.pattern.message) {
+            this.pattern.message = /[а-яА-Я]/;
+        }
+        if (!this.pattern.name) {
+            this.pattern.name = /[а-яА-Я]/;
+        }
+
+        console.log('this.pattern: ', this.pattern);
 
     }
 
