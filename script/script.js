@@ -461,26 +461,29 @@ window.addEventListener('DOMContentLoaded', function() {
 
         });
 
-        const postData = (body, sucsess, error) => {
-            const reguest = new XMLHttpRequest();
-            reguest.addEventListener('readystatechange', () => {
+        const postData = (body) => {
+            return new Promise((resolve, reject) => {
+                const reguest = new XMLHttpRequest();
+                reguest.addEventListener('readystatechange', () => {
 
-                if (reguest.readyState !== 4) {
-                    return;
-                }
-                if (reguest.status === 200) {
-                    sucsess();
-                } else {
-                    error();
-                }
-            });
-            reguest.open('POST', './server.php');
-            reguest.setRequestHeader('Content-Type', 'application/json');
-            reguest.send(JSON.stringify(body));
+                    if (reguest.readyState !== 4) {
+                        return;
+                    }
+                    if (reguest.status === 200) {
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                });
+                reguest.open('POST', './server.php');
+                reguest.setRequestHeader('Content-Type', 'application/json');
+                reguest.send(JSON.stringify(body));
+            })
         };
 
     };
-    sendForm();
+    sendForm()
+        .then();
 
 
 });
