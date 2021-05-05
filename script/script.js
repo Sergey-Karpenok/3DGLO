@@ -279,15 +279,20 @@ window.addEventListener('DOMContentLoaded', function() {
     // проверка формы на корректный ввод данных
     //  проверка имени и сообщения
     const nameMessageCheck = () => {
-        const form2Name = document.getElementById('form2-name');
-        const form2Message = document.getElementById('form2-message')
+        const form2Name = document.getElementById('form2-name'),
+            form2Message = document.getElementById('form2-message'),
+            form1Name = document.querySelector('.form-name');
 
         form2Name.addEventListener('input', () => {
             form2Name.value = form2Name.value.replace(/[^а-яА-Я\- ]/g, '');
         });
 
+        form1Name.addEventListener('input', () => {
+            form1Name.value = form1Name.value.replace(/[^а-яА-Я\ ]/g, '');
+        });
+
         form2Message.addEventListener('input', () => {
-            form2Message.value = form2Message.value.replace(/[^а-яА-Я\- ]/g, '');
+            form2Message.value = form2Message.value.replace(/[^а-яА-Я\- ,.? ]/g, '');
         });
 
         form2Name.addEventListener('blur', () => {
@@ -307,21 +312,33 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // проверка формы email
     const emailCheck = () => {
-        const email = document.getElementById('form2-email');
+        const email = document.getElementById('form2-email'),
+            form1Email = document.querySelector('.form-email');
 
         email.addEventListener('input', () => {
             email.value = email.value.replace(/[^a-zA-Z@-_\.\!~\*']/g, '');
+        });
+
+        form1Email.addEventListener('input', () => {
+            form1Email.value = form1Email.value.replace(/[^a-zA-Z@-_\.\!~\*']/g, '');
         });
     };
     emailCheck();
 
     // проверка формы телефон
     const phoneCheck = () => {
-        const phone = document.getElementById('form2-phone');
+        const phone = document.getElementById('form2-phone'),
+            form1Phone = document.querySelector('.form-phone');
+
 
         phone.addEventListener('input', () => {
             phone.value = phone.value.replace(/[^0-9()-]/g, '');
         });
+
+        form1Phone.addEventListener('input', () => {
+            form1Phone.value = form1Phone.value.replace(/[^0-9\+]/g, '');
+        });
+
         phone.addEventListener('blur', () => {
             phone.value = phone.value.replace(/-+/, '-');
         });
@@ -417,6 +434,10 @@ window.addEventListener('DOMContentLoaded', function() {
                 statusMessage.textContent = errorMessage;
             });
 
+            for (let item of form) {
+                item.value = '';
+            };
+
         });
 
         modalForm.addEventListener('submit', (event) => {
@@ -433,7 +454,7 @@ window.addEventListener('DOMContentLoaded', function() {
             }, () => {
                 statusMessage.textContent = errorMessage;
             });
-            // modalForm[0].form.value = '';
+
             for (let item of modalForm) {
                 item.value = '';
             };
