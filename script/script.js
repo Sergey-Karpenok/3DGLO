@@ -395,8 +395,8 @@ window.addEventListener('DOMContentLoaded', function() {
             loadMessage = 'Загрузка...',
             sucsessMesage = 'Заявка отправлена, спасибо мы скоро с вами свяжемся';
 
-        const form = document.getElementById('form1');
-
+        const form = document.getElementById('form1'),
+            modalForm = document.getElementById('form2');
         const statusMessage = document.createElement('div');
         statusMessage.textContent = 'Все в порядке';
         statusMessage.style.cssText = `font-size: 2rem; color: green`;
@@ -419,6 +419,27 @@ window.addEventListener('DOMContentLoaded', function() {
 
         });
 
+        modalForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            modalForm.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(modalForm);
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+            postData(body, () => {
+                statusMessage.textContent = sucsessMesage;
+            }, () => {
+                statusMessage.textContent = errorMessage;
+            });
+            // modalForm[0].form.value = '';
+            for (let item of modalForm) {
+                item.value = '';
+            };
+
+        });
+
         const postData = (body, sucsess, error) => {
             const reguest = new XMLHttpRequest();
             reguest.addEventListener('readystatechange', () => {
@@ -436,7 +457,6 @@ window.addEventListener('DOMContentLoaded', function() {
             reguest.setRequestHeader('Content-Type', 'application/json');
             reguest.send(JSON.stringify(body));
         };
-
 
     };
     sendForm();
