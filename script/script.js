@@ -372,21 +372,74 @@ window.addEventListener('DOMContentLoaded', function() {
     calc(100);
 
     // валидатор
-    const valid = new Validator({
-        selector: '#form2',
-        pattern: {},
-        metod: {
-            'name': [
-                ['notEmpty'],
-                ['pattern', 'name']
-            ],
-            'message': [
-                ['notEmpty'],
-                ['pattern', 'message']
-            ]
-        }
-    });
+    // const valid = new Validator({
+    //     selector: '#form2',
+    //     pattern: {},
+    //     metod: {
+    //         'name': [
+    //             ['notEmpty'],
+    //             ['pattern', 'name']
+    //         ],
+    //         'message': [
+    //             ['notEmpty'],
+    //             ['pattern', 'message']
+    //         ]
+    //     }
+    // });
 
-    valid.init();
+    // valid.init();
+
+    // send-ajax-form 
+    const sendForm = () => {
+        const errorMessage = 'Что-то пошло не так...',
+            loadMessage = 'Загрузка...',
+            sucsessMesage = 'Заявка отправлена, спасибо мы скоро с вами свяжемся';
+
+        const form = document.getElementById('form1');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.textContent = 'Все в порядке';
+        statusMessage.style.cssText = `font-size: 2rem; color: green`;
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(form);
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+
+            postData(body, () => {
+                statusMessage.textContent = sucsessMesage;
+            }, () => {
+                statusMessage.textContent = errorMessage;
+            });
+
+        });
+
+        const postData = (body, sucsess, error) => {
+            const reguest = new XMLHttpRequest();
+            reguest.addEventListener('readystatechange', () => {
+
+                if (reguest.readyState !== 4) {
+                    return;
+                }
+                if (reguest.status === 200) {
+                    sucsess();
+                } else {
+                    error();
+                }
+            });
+            reguest.open('POST', './server.php');
+            reguest.setRequestHeader('Content-Type', 'application/json');
+            reguest.send(JSON.stringify(body));
+        };
+
+
+    };
+    sendForm();
+
 
 });
