@@ -292,7 +292,7 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         form2Message.addEventListener('input', () => {
-            form2Message.value = form2Message.value.replace(/[^а-яА-Я\- ,.? ]/g, '');
+            form2Message.value = form2Message.value.replace(/[^а-яА-Я\- ,.?\d ]/g, '');
         });
 
         form2Name.addEventListener('blur', () => {
