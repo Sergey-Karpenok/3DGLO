@@ -284,11 +284,11 @@ window.addEventListener('DOMContentLoaded', function() {
             form1Name = document.querySelector('.form-name');
 
         form2Name.addEventListener('input', () => {
-            form2Name.value = form2Name.value.replace(/[^а-яА-Я\- ]{2,50}/g, '');
+            form2Name.value = form2Name.value.replace(/[^а-яА-Я\- ]/g, '');
         });
 
         form1Name.addEventListener('input', () => {
-            form1Name.value = form1Name.value.replace(/[^а-яА-Я\ ]{2,50}/g, '');
+            form1Name.value = form1Name.value.replace(/[^а-яА-Я\ ]/g, '');
         });
 
         form2Message.addEventListener('input', () => {
@@ -332,11 +332,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
         phone.addEventListener('input', () => {
-            phone.value = phone.value.replace(/\+?[78]([-()]*\d){10}/g, '');
+            phone.value = phone.value.replace(/[^-()\+\d]/g, '');
         });
 
         form1Phone.addEventListener('input', () => {
-            form1Phone.value = form1Phone.value.replace(/\+?[78]([-()]*\d){10}/g, '');
+            form1Phone.value = form1Phone.value.replace(/[^-()\+\d]/g, '');
         });
 
         phone.addEventListener('blur', () => {
@@ -391,26 +391,26 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     calc(100);
 
-    // валидатор
-    const valid = new Validator({
-        selector: '#form2',
-        pattern: {
-            name: /[а-яА-Я]/,
-            message: /\w/
-        },
-        metod: {
-            'form2-name': [
-                ['notEmpty'],
-                ['pattern', 'name']
-            ],
-            'form2-message': [
-                ['notEmpty'],
-                ['pattern', 'message']
-            ]
-        }
-    });
+    // // валидатор
+    // const valid = new Validator({
+    //     selector: '#form2',
+    //     pattern: {
+    //         name: /[а-яА-Я]/,
+    //         message: /\w/
+    //     },
+    //     metod: {
+    //         'form2-name': [
+    //             ['notEmpty'],
+    //             ['pattern', 'name']
+    //         ],
+    //         'form2-message': [
+    //             ['notEmpty'],
+    //             ['pattern', 'message']
+    //         ]
+    //     }
+    // });
 
-    valid.init();
+    // valid.init();
 
     // send-ajax-form 
     const sendForm = () => {
