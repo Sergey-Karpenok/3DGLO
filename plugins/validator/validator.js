@@ -12,7 +12,14 @@ class Validator {
     init() {
         this.applyStyle();
         this.setPattern();
-        this.elemetsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)))
+        this.elemetsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
+        this.form.addEventListener('submit', e => {
+            e.preventDefault();
+            this.elemetsForm.forEach(elem => this.checkIt({ target: elem }));
+            if (this.error.size) {
+                e.preventDefault();
+            }
+        })
     }
 
     isValid(elem) {
@@ -30,14 +37,17 @@ class Validator {
             }
         };
 
-        const metod = this.metod[elem.id];
+        if (this.metod) {
+            const metod = this.metod[elem.id];
 
-        if (metod) {
-            return metod.every(item => {
-                console.log(validatorMethod[item[0]](elem, this.pattern[item[1]]));
-                console.log(item);
-                return true;
-            })
+            if (metod) {
+                return metod.every(item => {
+                    console.log(validatorMethod[item[0]](elem, this.pattern[item[1]]));
+                    console.log('validatorMethod', validatorMethod[item[0]]);
+                    console.log(this.pattern[item]);
+                    return validatorMethod[item[0]](elem, this.pattern[item[1]]);
+                })
+            }
         }
 
         return true;
@@ -101,8 +111,6 @@ class Validator {
         if (!this.pattern.name) {
             this.pattern.name = /([а-яА-Я]){2,50}/;
         }
-
-        console.log('this.pattern: ', this.pattern);
 
     }
 
