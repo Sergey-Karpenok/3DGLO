@@ -19,6 +19,8 @@ class Validator {
         const validatorMethod = {
             notEmpty(elem) {
                 if (elem.value.trim() === '') {
+                    console.log('elem.value.trim(): ', elem.value.trim());
+
                     return false;
                 }
                 return true;
@@ -28,8 +30,15 @@ class Validator {
             }
         };
 
-        const metod = this.metod;
-        console.log('metod: ', metod);
+        const metod = this.metod[elem.id];
+
+        if (metod) {
+            return metod.every(item => {
+                console.log(validatorMethod[item[0]](elem, this.pattern[item[1]]));
+                console.log(item);
+                return true;
+            })
+        }
 
         return true;
     }
@@ -42,9 +51,7 @@ class Validator {
         } else {
             this.showError(target);
             this.error.add(target);
-
         }
-        console.log('this.error: ', this.error);
     }
 
     showError(elem) {
@@ -92,7 +99,7 @@ class Validator {
             this.pattern.message = /[а-яА-Я]/;
         }
         if (!this.pattern.name) {
-            this.pattern.name = /[а-яА-Я]/;
+            this.pattern.name = /([а-яА-Я]){2,50}/;
         }
 
         console.log('this.pattern: ', this.pattern);
