@@ -373,7 +373,7 @@ window.addEventListener('DOMContentLoaded', function() {
             }
 
             if (typeValue && squareValue) {
-                total = price * typeValue * squareValue * countValue * dayValue;
+                total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
             }
             totalValue.textContent = total;
         };
@@ -428,11 +428,9 @@ window.addEventListener('DOMContentLoaded', function() {
                 body[key] = val;
             });
 
-            postData(body, () => {
-                statusMessage.textContent = sucsessMesage;
-            }, () => {
-                statusMessage.textContent = errorMessage;
-            });
+            postData(body)
+                .then(() => statusMessage.textContent = sucsessMesage)
+                .then(() => statusMessage.textContent = errorMesage);
 
             for (let item of form) {
                 item.value = '';
@@ -449,11 +447,10 @@ window.addEventListener('DOMContentLoaded', function() {
             formData.forEach((val, key) => {
                 body[key] = val;
             });
-            postData(body, () => {
-                statusMessage.textContent = sucsessMesage;
-            }, () => {
-                statusMessage.textContent = errorMessage;
-            });
+
+            postData(body)
+                .then(() => statusMessage.textContent = sucsessMesage)
+                .then(() => statusMessage.textContent = errorMesage);
 
             for (let item of modalForm) {
                 item.value = '';
@@ -482,8 +479,8 @@ window.addEventListener('DOMContentLoaded', function() {
         };
 
     };
-    sendForm()
-        .then();
+    sendForm();
+
 
 
 });
