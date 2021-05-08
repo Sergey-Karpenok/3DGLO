@@ -108,7 +108,5 @@ class Validator {
         if (!this.pattern.email) {
             this.pattern.email = /^$/;
         }
-
     }
-
-}
+};
