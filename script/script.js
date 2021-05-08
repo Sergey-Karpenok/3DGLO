@@ -391,27 +391,6 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     calc(100);
 
-    // // валидатор
-    // const valid = new Validator({
-    //     selector: '#form2',
-    //     pattern: {
-    //         name: /[а-яА-Я]/,
-    //         message: /\w/
-    //     },
-    //     metod: {
-    //         'form2-name': [
-    //             ['notEmpty'],
-    //             ['pattern', 'name']
-    //         ],
-    //         'form2-message': [
-    //             ['notEmpty'],
-    //             ['pattern', 'message']
-    //         ]
-    //     }
-    // });
-
-    // valid.init();
-
     // send-ajax-form 
     const sendForm = () => {
         const errorMessage = 'Что-то пошло не так...',
