@@ -31,9 +31,7 @@ class Validator {
                 return true;
             },
             pattern(elem, pattern) {
-                console.log('pattern: ', pattern);
                 return pattern.test(elem.value)
-
             }
         };
 

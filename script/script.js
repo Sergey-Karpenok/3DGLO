@@ -408,14 +408,18 @@ window.addEventListener('DOMContentLoaded', function() {
             form.appendChild(statusMessage);
             statusMessage.textContent = loadMessage;
             const formData = new FormData(form);
-            let body = {};
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
 
-            postData(body)
-                .then(() => statusMessage.textContent = sucsessMesage)
-                .then(() => statusMessage.textContent = errorMesage);
+            postData(formData)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw new Error('Ошибка статус не равен 200');
+                    }
+                    statusMessage.textContent = sucsessMesage;
+                })
+                .catch((error) => {
+                    statusMessage.textContent = errorMessage;
+                    console.log(error);
+                });
 
             for (let item of form) {
                 item.value = '';
@@ -428,14 +432,18 @@ window.addEventListener('DOMContentLoaded', function() {
             modalForm.appendChild(statusMessage);
             statusMessage.textContent = loadMessage;
             const formData = new FormData(modalForm);
-            let body = {};
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
 
-            postData(body)
-                .then(() => statusMessage.textContent = sucsessMesage)
-                .then(() => statusMessage.textContent = errorMesage);
+            postData(formData)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw new Error('Ошибка статус не равен 200');
+                    }
+                    statusMessage.textContent = sucsessMesage;
+                })
+                .catch((error) => {
+                    statusMessage.textContent = errorMessage;
+                    console.log(error);
+                });
 
             for (let item of modalForm) {
                 item.value = '';
@@ -444,23 +452,14 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         const postData = (body) => {
-            return new Promise((resolve, reject) => {
-                const reguest = new XMLHttpRequest();
-                reguest.addEventListener('readystatechange', () => {
 
-                    if (reguest.readyState !== 4) {
-                        return;
-                    }
-                    if (reguest.status === 200) {
-                        resolve();
-                    } else {
-                        reject();
-                    }
-                });
-                reguest.open('POST', './server.php');
-                reguest.setRequestHeader('Content-Type', 'application/json');
-                reguest.send(JSON.stringify(body));
-            })
+            return fetch('./server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body
+            });
         };
 
     };
