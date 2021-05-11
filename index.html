@@ -447,6 +447,30 @@
             }
         });
         validForm1.init();
+
+        const validForm3 = new Validator({
+            selector: '#form3',
+            pattern: {
+                name: /[А-Яа-я]{2,50}/,
+                phone: /\+?[78]([-()]*\d){10}/,
+                email: /\w+@\w+\.\w{2,3}/
+            },
+            metod: {
+                'form3-name': [
+                    ['notEmpty'],
+                    ['pattern', 'name']
+                ],
+                'form3-phone': [
+                    ['notEmpty'],
+                    ['pattern', 'phone']
+                ],
+                'form3-email': [
+                    ['notEmpty'],
+                    ['pattern', 'email']
+                ]
+            }
+        });
+        validForm3.init();
     </script>
     <script src="./dist/bundle.js"></script>
 </body>
