@@ -50,6 +50,7 @@ class Validator {
             this.error.delete(target);
         } else {
             this.showError(target);
+            target.value = '';
             this.error.add(target);
         }
     }
